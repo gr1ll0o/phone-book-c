@@ -5,13 +5,12 @@
 
 #define MAX 10
 char names[MAX][50];
-char phones[MAX][10];
+char phones[MAX][20];
+int count = 0;
 
 int main() {
     system("cls");
 
-    strcpy(names[0], "Thiago");
-    strcpy(phones[0], "1173606182");
     int opt;
     do {
         printf("-- AGENDA TELEFONICA --\n");
@@ -31,7 +30,7 @@ int main() {
                     if (strlen(names[i]) == 0 && strlen(phones[i]) == 0) {
                         printf("Nro %d. [VACIO]\n", i+1);
                     }else{
-                        printf("Nro %d. %s (%s)\n", i, names[i], phones[i]);
+                        printf("Nro %d. %s (%s)\n", i+1, names[i], phones[i]);
                     }
                 }
                 printf("\nDesea realizar otra operacion? (CualquierTecla: Si/0: No) ");
@@ -40,15 +39,22 @@ int main() {
                 system("cls");
             break;
             case 2: // Add contacts
-                printf("--- AGREGAR CONTACTOS ---\n");
+                if (count >= MAX) printf("No te queda espacio. Elimina un contacto y volvelo a intentar.\n");
+                else{
+                    printf("--- AGREGAR CONTACTOS ---\n");
+                    printf("Nombre?: ");
+                    scanf("%s", names[count]);
+                    printf("Telefono?: ");
+                    scanf("%s", phones[count]);
+                    count++; // COUNTER TO MAX
+                    system("cls");
+                    printf("Contacto añadido.\n");
+                }
             break;
-            case 3: // Modify contacts
-                printf("--- MODIFICAR CONTACTOS ---\n");
-            break;
-            case 4: // Remove contacts
+            case 3: // Remove contacts
                 printf("--- ELIMINAR CONTACTOS ---\n");
             break;
-            case 5: // Exit
+            case 4: // Exit
                 printf("Saliendo... ");
                 return 0;
             break;
@@ -56,7 +62,7 @@ int main() {
                 printf("Operacion invalida.\n");
             break;
         }
-    }while(opt != 5);
+    }while(opt != 4);
 
     return 0;
 }
