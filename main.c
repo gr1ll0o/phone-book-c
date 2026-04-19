@@ -33,10 +33,7 @@ int main() {
                 }
                 printf("\nDesea realizar otra operacion? (1: Si/0: No) ");
                 scanf("%d", &sel);
-                if (!sel) {
-                    printf("\nSaliendo...");
-                    return 0;
-                }
+                if (!sel) return 0;
                 system("cls");
             break;
             case 2: // Add contacts
