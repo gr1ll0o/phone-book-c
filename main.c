@@ -16,9 +16,8 @@ int main() {
         printf("-- AGENDA TELEFONICA --\n");
         printf("1. Ver contactos\n");
         printf("2. Agregar contactos\n");
-        printf("3. Modificar contactos\n");
-        printf("4. Eliminar contactos\n");
-        printf("5. Salir\n\n> ");
+        printf("3. Eliminar contactos\n");
+        printf("4. Salir\n\n> ");
         scanf("%d", &opt);
 
         system("cls");
@@ -39,7 +38,7 @@ int main() {
                 system("cls");
             break;
             case 2: // Add contacts
-                if (count >= MAX) printf("No te queda espacio. Elimina un contacto y volvelo a intentar.\n");
+                if (count >= MAX) printf("No te queda espacio. Modifica uno.\n");
                 else{
                     printf("--- AGREGAR CONTACTOS ---\n");
                     printf("Nombre?: ");
@@ -51,8 +50,31 @@ int main() {
                     printf("Contacto añadido.\n");
                 }
             break;
-            case 3: // Remove contacts
-                printf("--- ELIMINAR CONTACTOS ---\n");
+            case 3: // Modify contacts
+                if (count == 0) printf("No tenes contactos.\n");
+                else{
+                    int c = count+1;
+                    while (c > count)
+                    {
+                        printf("--- MODIFICAR CONTACTOS ---\n");
+                        for (int i = 0; i < 10; i++) {
+                            if (strlen(names[i]) != 0 && strlen(phones[i]) != 0) {
+                                printf("Nro %d. %s (%s)\n", i + 1, names[i], phones[i]);
+                            }
+                        }
+                        printf("\nIntroduzca el numero de contacto a editar (0 para salir): ");
+                        scanf("%d", &c);
+                        system("cls");
+                        if (c > count) printf("Numero invalido.\n");
+                    }
+
+                    printf("Nombre?: ");
+                    scanf("%s", names[c-1]);
+                    printf("Telefono?: ");
+                    scanf("%s", phones[c-1]);
+                    system("cls");
+                    printf("Contacto modificado.");
+                }
             break;
             case 4: // Exit
                 printf("Saliendo... ");
