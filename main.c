@@ -6,21 +6,22 @@
 #define MAX 10
 char names[MAX][50];
 char phones[MAX][20];
+char clear_console[] = "clear";
 int count = 0;
 
 int main() {
-    system("cls");
+    system(clear_console);
 
     int opt;
     do {
         printf("-- AGENDA TELEFONICA --\n");
         printf("1. Ver contactos\n");
         printf("2. Agregar contactos\n");
-        printf("3. Eliminar contactos\n");
+        printf("3. Modificar contactos\n");
         printf("4. Salir\n\n> ");
         scanf("%d", &opt);
 
-        system("cls");
+        system(clear_console);
         switch(opt) {
             case 1: // View contacts
                 char sel[10];
@@ -35,8 +36,8 @@ int main() {
                 printf("\nDesea realizar otra operacion? (CualquierTecla: Si/0: No) ");
                 scanf("%s", sel);
                 if (strcmp(sel, "0") == 0) return 0;
-                system("cls");
-            break;
+                system(clear_console);
+                break;
             case 2: // Add contacts
                 if (count >= MAX) printf("No te queda espacio. Modifica uno.\n");
                 else{
@@ -46,7 +47,7 @@ int main() {
                     printf("Telefono?: ");
                     scanf("%s", phones[count]);
                     count++; // COUNTER TO MAX
-                    system("cls");
+                    system(clear_console);
                     printf("Contacto añadido.\n");
                 }
             break;
@@ -64,15 +65,16 @@ int main() {
                         }
                         printf("\nIntroduzca el numero de contacto a editar (0 para salir): ");
                         scanf("%d", &c);
-                        system("cls");
+                        system(clear_console);
                         if (c > count) printf("Numero invalido.\n");
                     }
 
+                    if (c == 0) break;
                     printf("Nombre?: ");
                     scanf("%s", names[c-1]);
                     printf("Telefono?: ");
                     scanf("%s", phones[c-1]);
-                    system("cls");
+                    system(clear_console);
                     printf("Contacto modificado.");
                 }
             break;
