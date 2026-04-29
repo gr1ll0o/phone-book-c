@@ -1,18 +1,19 @@
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdlib.h>
+#include <ctype.h> // CHAR
+#include <string.h> // STRING
+#include <stdlib.h> // CLEAR CONSOLE
 
+// Definicion de variablees
 #define MAX 10
 char names[MAX][50];
 char phones[MAX][20];
-char clear_console[] = "clear"; // LINUX: CLEAR ; WINDOWS: CLS
+char clear_console[] = "cls"; // LINUX: CLEAR ; WINDOWS: CLS
 int count = 0;
 
 int main() {
     system(clear_console);
 
-    int opt;
+    int opt; // opcion
     do {
         printf("--- AGENDA TELEFONICA ---\n");
         printf("1. Ver contactos\n");
@@ -24,7 +25,6 @@ int main() {
         system(clear_console);
         switch(opt) {
             case 1: // View contacts
-                char sel[10];
                 printf("--- VER CONTACTOS ---\n");
                 for (int i = 0;i < MAX;i++) {
                     if (strlen(names[i]) == 0 && strlen(phones[i]) == 0) {
@@ -33,6 +33,7 @@ int main() {
                         printf("Nro %d. %s (%s)\n", i+1, names[i], phones[i]);
                     }
                 }
+                char sel[10];
                 printf("\nDesea realizar otra operacion? (CualquierTecla: Si/0: No) ");
                 scanf("%s", sel);
                 if (strcmp(sel, "0") == 0) opt = 4;
@@ -54,7 +55,7 @@ int main() {
             case 3: // Modify contacts
                 if (count == 0) printf("No tenes contactos.\n");
                 else{
-                    int c = count+1;
+                    int c = count;
                     do {
                         printf("--- MODIFICAR CONTACTOS ---\n");
                         for (int i = 0; i < MAX; i++) {
@@ -65,9 +66,10 @@ int main() {
                         printf("\nIntroduzca el numero de contacto a editar (0 para salir): ");
                         scanf("%d", &c);
                         system(clear_console);
-                        if (c > count || c <= 0) printf("Numero invalido.\n");
-                    }while (c > count || c <= 0);
+                        if (c > count || c < 0) printf("Numero invalido.\n");
+                    }while (c > count || c < 0);
 
+                    if (c == 0) break;
                     printf("Nombre?: ");
                     scanf(" %[^\n]", names[c-1]);
                     printf("Telefono?: ");
